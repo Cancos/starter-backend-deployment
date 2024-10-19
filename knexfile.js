@@ -12,23 +12,32 @@ const URL =
 module.exports = {
   development: {
     client: "postgresql",
-    connection: URL,
+    connection: {
+      connectionString: URL,
+      ssl: { rejectUnauthorized: false }
+    },
     migrations: {
       directory: __dirname + "/api/db/migrations",
     },
     seeds: {
       directory: __dirname + "/api/db/seeds",
-    },
+    }
   },
 
   production: {
     client: "postgresql",
-    connection: URL,
+    connection: {
+      connectionString: URL,
+      ssl: { rejectUnauthorized: false }
+    },
     migrations: {
       directory: __dirname + "/api/db/migrations",
     },
     seeds: {
       directory: __dirname + "/api/db/seeds",
     },
+    ssl: {
+      rejectUnauthorized: false // This will allow connections without requiring SSL certificates to be valid.
+    }
   },
 };
